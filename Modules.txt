@@ -1,0 +1,26 @@
+MODULE DESCRIPTION:
+1.Import necessary libraries: 
+The code begins by importing the requests and json libraries, which are used for making HTTP requests and handling JSON data, respectively.
+2.Define Instagram credentials:
+ You need to replace 'your_username' and 'your_password' with your actual Instagram username and password. These credentials will be used for logging into Instagram.
+3.Login to Instagram:
+ The code creates a session using requests.Session() and sends a POST request to the Instagram login URL with the provided username and password. The request is made with the appropriate headers and payload.
+4.Check login status:
+ The response from the login request is parsed as JSON, and it is checked whether the login was successful by examining the 'authenticated' field in the response. If authenticated, it prints "Login successful"; otherwise, it prints "Login failed."
+5.Perform actions on Instagram: 
+If the login was successful, the code proceeds to define a hashtag to search for. It then constructs a URL to search for posts with the given hashtag. A GET request is sent to this URL, and the response is parsed as JSON.
+6.Process hashtag search results: 
+If the response contains the 'graphql' field, it means the hashtag search was successful. The code extracts the list of posts from the response and iterates over the top 5 posts.
+7.Like and follow posts: 
+For each post, the code retrieves the post ID and constructs URLs for liking the post and following the post's owner. It sends POST requests to these URLs to perform the respective actions.
+8.Print action status: 
+After liking and following each post, it prints a message indicating the post ID that was liked and followed.
+9.Handle search failure: 
+If the response does not contain the 'graphql' field, it means the hashtag search failed. In this case, it prints an error message.
+10.Logout from Instagram:
+ Finally, the code sends a POST request to the logout URL to log out from the Instagram session.
+Print logout status: It prints "Logout successful" to indicate that the logout request was successful
+
+
+ 
+

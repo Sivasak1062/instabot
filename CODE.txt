@@ -1,0 +1,67 @@
+                      9.APPENDIX
+9.1 SOURCE CODE:
+import requests
+import json
+
+# Define your Instagram credentials
+username = 'your_username'
+password = 'your_password'
+
+# Login to Instagram
+session = requests.Session()
+
+login_url = 'https://www.instagram.com/accounts/login/ajax/'
+login_payload = {
+    'username': username,
+    'password': password,
+    'queryParams': '{}'
+}
+
+login_headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Referer': 'https://www.instagram.com/accounts/login/',
+    'Content-Type': 'application/x-www-form-urlencoded'
+}
+
+response = session.post(login_url, data=login_payload, headers=login_headers)
+response_json = json.loads(response.text)
+
+if response_json['authenticated']:
+    print('Login successful')
+else:
+    print('Login failed')
+
+# Perform actions on Instagram
+if response_json['authenticated']:
+    # Define the hashtag to search for
+    hashtag = 'your_hashtag'
+
+    # Search for posts with the given hashtag
+    search_url = f'https://www.instagram.com/explore/tags/{hashtag}/?__a=1'
+    response = session.get(search_url)
+    response_json = json.loads(response.text)
+
+    if 'graphql' in response_json:
+        hashtag_posts = response_json['graphql']['hashtag']['edge_hashtag_to_media']['edges']
+
+        # Like and follow the top posts
+        for post in hashtag_posts[:5]:  # Like and follow the top 5 posts
+            post_id = post['node']['id']
+            like_url = f'https://www.instagram.com/web/likes/{post_id}/like/'
+            follow_url = f'https://www.instagram.com/web/friendships/{post["node"]["owner"]["id"]}/follow/'
+
+            session.post(like_url)
+            session.post(follow_url)
+
+            print(f'Liked and followed post with id {post_id}')
+
+    else:
+        print('Error: Hashtag search failed')
+
+# Logout from Instagram
+logout_url = 'https://www.instagram.com/accounts/logout/'
+session.post(logout_url)
+
+print('Logout successful')
+

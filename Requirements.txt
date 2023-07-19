@@ -1,0 +1,13 @@
+                                            2.SYSTEM SPECIFICAIONS
+ 
+2.1SOFTWARE SPECIFICATIONS:
+                                    OPERATING SYSTEMS         :   WINDOWS 10 PRO(64 BIT)
+                                    fRONT END                 :     PYTHON
+                                    BACK END                  :     WEB SCRAPING
+                                   IDLE FOR PYTHON            :  VERSION (3.11 64 BIT)
+                                                   
+2.2HARDWRE SPECIFICATIONS:
+                                   PROCESSOR                  :    AMD PRO A4-4350B,2.5GHZ
+                                   RAM                        :    4GB
+                                   HARD DISK                  :   500GB
+                                   KEYBOARD                   :  STANDARD KEYBOARD
